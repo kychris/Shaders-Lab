@@ -1,6 +1,6 @@
 ﻿// Shader with Posterized (banded) diffuse and specular light
 
-Shader "Unlit/Shader 014"
+Shader "Custom/Cartoon Lighting"
 {
     Properties {
        _Color ("Color", Color ) = (1,1,1,1)

@@ -1,6 +1,6 @@
-﻿// Shader with Posterized (banded) diffuse and specular light
+﻿// Shader that brightens when mouse is close
 
-Shader "Unlit/Shader 014"
+Shader "Custom/Flashlight"
 {
     Properties {
        _Color ("Color", Color ) = (1,1,1,1)
@@ -37,6 +37,7 @@ Shader "Unlit/Shader 014"
 
             float4 _Color;
             float _Gloss;
+            uniform float3 _MousePos;
 
             float Posterize(float steps, float val) 
             {
@@ -55,6 +56,11 @@ Shader "Unlit/Shader 014"
 
             fixed4 frag (VertexOutput o) : SV_Target
             {
+
+                //glow values
+                float dist = distance(_MousePos, o.worldPos);
+                float glow = max(0, (1-dist));
+
                 float2 uv = o.uv0;
                 float3 normal = normalize(o.normal);
 
@@ -66,7 +72,7 @@ Shader "Unlit/Shader 014"
                 float3 diffuseFallout = max(0, dot(LightDir, normal)); //cos(theta) of the angle between light and normal 
                 diffuseFallout = Posterize(4, diffuseFallout); //apply falloff to diffuse
                 float3 diffuseLight = LightColor * diffuseFallout;  //apply color to diffuse light
-
+                
                 //ambient light
                 float3 ambientLight = float3(0.2, 0.1, 0.0);
 
@@ -82,7 +88,7 @@ Shader "Unlit/Shader 014"
 
                 //material
                 float3 compositeLight = diffuseLight + ambientLight;
-                compositeLight = compositeLight * _Color.rgb + specularLight; //apply material color
+                compositeLight = compositeLight * _Color.rgb + specularLight + glow; 
 
                 return float4(compositeLight, 0);
             }

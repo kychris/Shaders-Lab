@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ShorelineMat
-  m_Shader: {fileID: 4800000, guid: a87b25d09e6134efd91dddc3e6b91293, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5205b2ae18b284a85bac2a15c9af37bf, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

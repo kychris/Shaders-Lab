@@ -1,6 +1,6 @@
 ﻿// Shader with stepping blending
 
-Shader "Unlit/Shader 013"
+Shader "custom/PosterizedLerp"
 {
     Properties {}
     SubShader
@@ -57,12 +57,17 @@ Shader "Unlit/Shader 013"
                 //get UV property
                 float2 uv = o.uv0;
 
+                //two colors to blend
                 float3 colorA = float3(0.1, 0.8, 1);
                 float3 colorB = float3(1, 0.1, 0.8);
+
+                //use uv.y as the t in lerp
                 float t = uv.y;
-                t = Posterize(10, t);
-                float3 blend = lerp(colorA, colorB, t);                
-                
+                //posterize t before use
+                t = Posterize(10, t); 
+                //blend using t
+                float3 blend = lerp(colorA, colorB, t);   
+
                 return float4(blend, 0);
             }
             ENDCG
