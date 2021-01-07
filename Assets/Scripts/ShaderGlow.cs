@@ -7,7 +7,7 @@ public class ShaderGlow : MonoBehaviour
 
     Plane p;
     Vector2 mousePos;
-    Camera camera;
+    new Camera camera;
     Ray ray;
 
     // Start is called before the first frame update
@@ -21,7 +21,6 @@ public class ShaderGlow : MonoBehaviour
     void Update()
     {
         mousePos = Input.mousePosition;
-        // Debug.Log(mousePos);
         ray = camera.ScreenPointToRay(mousePos);
         if (p.Raycast(ray, out float enterDist))
         {

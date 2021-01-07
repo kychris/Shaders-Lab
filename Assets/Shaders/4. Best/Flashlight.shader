@@ -56,7 +56,6 @@ Shader "Custom/Flashlight"
 
             fixed4 frag (VertexOutput o) : SV_Target
             {
-
                 //glow values
                 float dist = distance(_MousePos, o.worldPos);
                 float glow = max(0, (1-dist));
